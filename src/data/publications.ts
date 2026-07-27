@@ -10,11 +10,14 @@ export interface Publication {
 export const publications: Publication[] = [
   {
     title: 'Transformer-Based Rate Prediction for Multi-Band Cellular Handsets',
-    authors: 'Ruibin Chen, H. Lei, H. Guo, M. Mezzavilla, H. Poddar, T. Yoshimura, and S. Rangan',
-    venue: 'IEEE ICC 2026 Workshop (WS02): 4th Workshop on Intelligent Movable and Reconfigurable Antennas for Future Wireless Communication and Sensing',
+    authors: 'Ruibin Chen, Haozhe Lei, Hao Guo, Marco Mezzavilla, Hitesh Poddar, Tomoki Yoshimura, and Sundeep Rangan',
+    venue: '2026 IEEE International Conference on Communications Workshops (ICC Workshops), pp. 1–6',
     year: 2026,
-    status: 'Accepted',
-    links: [{ label: 'arXiv', href: 'https://arxiv.org/abs/2509.25722' }]
+    status: 'Published',
+    links: [
+      { label: 'DOI', href: 'https://doi.org/10.1109/ICCWorkshops63917.2026.11586536' },
+      { label: 'arXiv', href: 'https://arxiv.org/abs/2509.25722' }
+    ]
   },
   {
     title: 'Interpolation Techniques for Fast Channel Estimation in Ray Tracing',
