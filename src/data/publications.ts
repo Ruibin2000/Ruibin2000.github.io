@@ -13,7 +13,6 @@ export const publications: Publication[] = [
     authors: 'Ruibin Chen, Haozhe Lei, Hao Guo, Marco Mezzavilla, Hitesh Poddar, Tomoki Yoshimura, and Sundeep Rangan',
     venue: '2026 IEEE International Conference on Communications Workshops (ICC Workshops), pp. 1–6',
     year: 2026,
-    status: 'Published',
     links: [{ label: 'DOI', href: 'https://doi.org/10.1109/ICCWorkshops63917.2026.11586536' }]
   },
   {
