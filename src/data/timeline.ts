@@ -10,7 +10,7 @@ export interface TimelineEntry {
 export const timeline: TimelineEntry[] = [
   {
     period: 'Jan 2025–present',
-    title: 'PhD Student, Electrical and Computer Engineering & Research Assistant',
+    title: 'PhD Student & Research Assistant',
     organization: 'New York University · NYU WIRELESS',
     location: 'Brooklyn, NY',
     description: 'Pursuing a PhD while conducting research in wireless channel modeling, learning-based prediction, ray tracing, and robotic measurement systems.',
