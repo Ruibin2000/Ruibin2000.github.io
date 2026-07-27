@@ -14,10 +14,7 @@ export const publications: Publication[] = [
     venue: '2026 IEEE International Conference on Communications Workshops (ICC Workshops), pp. 1–6',
     year: 2026,
     status: 'Published',
-    links: [
-      { label: 'DOI', href: 'https://doi.org/10.1109/ICCWorkshops63917.2026.11586536' },
-      { label: 'arXiv', href: 'https://arxiv.org/abs/2509.25722' }
-    ]
+    links: [{ label: 'DOI', href: 'https://doi.org/10.1109/ICCWorkshops63917.2026.11586536' }]
   },
   {
     title: 'Interpolation Techniques for Fast Channel Estimation in Ray Tracing',
