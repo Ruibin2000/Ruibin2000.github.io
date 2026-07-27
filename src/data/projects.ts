@@ -9,7 +9,7 @@ export interface Project {
   description: string;
   technologies: string[];
   visual: 'waveform' | 'attention' | 'ray' | 'robot';
-  link?: { label: string; href: string };
+  links?: { label: string; href: string }[];
   pendingLink?: string;
 }
 
@@ -36,7 +36,7 @@ export const projects: Project[] = [
       'A temporal convolution and Transformer model for predicting per-antenna rates from sparse measurements across multi-band cellular handset channels.',
     technologies: ['Python', 'Sionna RT', 'Transformers', 'Temporal convolution', 'FR1 / FR3'],
     visual: 'attention',
-    link: { label: 'View publication', href: '#publications' }
+    links: [{ label: 'View publication', href: '#publications' }]
   },
   {
     slug: 'ray-tracing-channel-modeling',
@@ -48,7 +48,7 @@ export const projects: Project[] = [
       'A reflection-model-based interpolation framework for estimating spatial MIMO channel features from ray-traced samples in urban LOS and NLOS scenarios.',
     technologies: ['Sionna RT', 'MIMO', 'Kernel regression', 'Path clustering', '28 GHz'],
     visual: 'ray',
-    link: { label: 'View publication', href: '#publications' }
+    links: [{ label: 'View publication', href: '#publications' }]
   },
   {
     slug: 'robotic-wireless-measurement',
@@ -60,6 +60,9 @@ export const projects: Project[] = [
       'A ROS 2 platform for repeatable wireless measurements, robot and gimbal control, SLAM visualization, and angle-of-arrival-assisted transmitter localization.',
     technologies: ['ROS 2', 'TurtleBot 4', 'Clearpath Jackal', 'SLAM', 'RViz', 'Fast DDS'],
     visual: 'robot',
-    pendingLink: 'Project link pending'
+    links: [
+      { label: 'View code', href: 'https://github.com/Ruibin2000/turtlebot4_project' },
+      { label: 'Watch demo', href: 'https://youtu.be/nbqg_tmVgjU?si=MARgUfUTI6UjY8u3' }
+    ]
   }
 ];

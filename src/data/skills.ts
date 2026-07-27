@@ -10,7 +10,7 @@ export const awards = [
   {
     title: 'The Myron M. Rosenthal Award for Best MS Academic Achievement',
     organization: 'New York University',
-    year: 'Award year not supplied'
+    year: '2024'
   },
   {
     title: 'First Class Honors',

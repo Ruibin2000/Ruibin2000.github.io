@@ -27,8 +27,23 @@ const { project, index } = Astro.props;
     <ul class="tag-list" aria-label="Technologies used">
       {project.technologies.map((technology) => <li>{technology}</li>)}
     </ul>
-    {project.link ? (
-      <a class="text-link" href={project.link.href}>{project.link.label}<span aria-hidden="true"> ↗</span></a>
+    {project.links ? (
+      <div class="project-links">
+        {project.links.map((link) => {
+          const external = link.href.startsWith('http');
+          return (
+            <a
+              class="text-link"
+              href={link.href}
+              target={external ? '_blank' : undefined}
+              rel={external ? 'noopener noreferrer' : undefined}
+              aria-label={external ? `${link.label} for ${project.title} (opens in a new tab)` : undefined}
+            >
+              {link.label}<span aria-hidden="true"> ↗</span>
+            </a>
+          );
+        })}
+      </div>
     ) : (
       <span class="pending-link" title="TODO: add a verified project URL">{project.pendingLink}</span>
     )}
@@ -95,6 +110,7 @@ const { project, index } = Astro.props;
   .tag-list { display: flex; flex-wrap: wrap; gap: .45rem; margin: 1.3rem 0 1.4rem; padding: 0; list-style: none; }
   .tag-list li { padding: .35rem .62rem; border: 1px solid var(--border); border-radius: .35rem; color: var(--text-muted); font-family: var(--font-mono); font-size: .72rem; }
   .pending-link { color: var(--text-subtle); font-family: var(--font-mono); font-size: .78rem; }
+  .project-links { display: flex; flex-wrap: wrap; gap: .75rem 1.2rem; }
 
   @media (max-width: 760px) {
     .project-card { grid-template-columns: 1fr; }
