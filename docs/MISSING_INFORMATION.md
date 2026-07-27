@@ -9,7 +9,7 @@ Visible placeholders remain on the public site until these items are supplied an
 - [x] Robotic Wireless Measurement Platform repository — `https://github.com/Ruibin2000/turtlebot4_project`
 - [x] Robotic Wireless Measurement Platform demo — `https://youtu.be/nbqg_tmVgjU?si=MARgUfUTI6UjY8u3`
 - [ ] RFSoC Waveform Transmitter dates and current status
-- [ ] NYU WIRELESS Research Assistant start date
+- [x] NYU WIRELESS Research Assistant start date — January 2025, concurrent with PhD study
 - [x] Year of the Myron M. Rosenthal Award — 2024
 
 Content held back because the supplied CV is inconsistent or incomplete:

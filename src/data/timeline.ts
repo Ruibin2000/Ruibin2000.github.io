@@ -4,24 +4,17 @@ export interface TimelineEntry {
   organization: string;
   location?: string;
   description?: string;
-  kind: 'Experience' | 'Education';
+  kind: 'Experience' | 'Education' | 'Education & Research';
 }
 
 export const timeline: TimelineEntry[] = [
   {
-    period: 'Current · start date to confirm',
-    title: 'Research Assistant',
-    organization: 'NYU WIRELESS',
-    location: 'Brooklyn, NY',
-    description: 'Research in wireless channel modeling, learning-based prediction, ray tracing, and robotic measurement systems.',
-    kind: 'Experience'
-  },
-  {
     period: 'Jan 2025–present',
-    title: 'PhD, Electrical and Computer Engineering',
-    organization: 'New York University',
+    title: 'PhD Student, Electrical and Computer Engineering & Research Assistant',
+    organization: 'New York University · NYU WIRELESS',
     location: 'Brooklyn, NY',
-    kind: 'Education'
+    description: 'Pursuing a PhD while conducting research in wireless channel modeling, learning-based prediction, ray tracing, and robotic measurement systems.',
+    kind: 'Education & Research'
   },
   {
     period: 'Oct–Dec 2024',
