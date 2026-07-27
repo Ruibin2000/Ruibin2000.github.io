@@ -1,0 +1,357 @@
+---
+import ProjectCard from '@/components/ProjectCard.astro';
+import PublicationItem from '@/components/PublicationItem.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { profile, researchInterests, socialLinks } from '@/data/profile';
+import { projects } from '@/data/projects';
+import { publications } from '@/data/publications';
+import { timeline } from '@/data/timeline';
+import { awards, skillGroups } from '@/data/skills';
+import { basePath } from '@/utils/base';
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="hero-grid-lines" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="hero-kicker"><span></span>Wireless research · systems engineering</p>
+        <h1><span>Ruibin</span> Chen</h1>
+        <p class="hero-statement">{profile.statement}</p>
+        <p class="hero-role">{profile.role}<br />{profile.affiliation}</p>
+        <div class="hero-actions" aria-label="Profile links">
+          <a class="button primary" href={`${basePath}${profile.cvPath}`} target="_blank" rel="noopener noreferrer">View CV <span aria-hidden="true">↗</span></a>
+          <a class="button secondary" href={`mailto:${profile.email}`}>Email me</a>
+        </div>
+        <div class="social-row">
+          {socialLinks.map((link) => (
+            link.href ? (
+              <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${link.label} profile (opens in a new tab)`}>{link.label}<span aria-hidden="true"> ↗</span></a>
+            ) : (
+              <span title={`TODO: add verified ${link.label} URL`}>{link.label} · {link.note}</span>
+            )
+          ))}
+        </div>
+      </div>
+
+      <div class="hero-portrait-wrap">
+        <div class="portrait-frame">
+          <img
+            src={`${basePath}${profile.photoPath}`}
+            width="506"
+            height="900"
+            alt="Portrait of Ruibin Chen wearing glasses and a dark headband"
+            fetchpriority="high"
+          />
+          <div class="portrait-overlay" aria-hidden="true"></div>
+          <div class="portrait-label">
+            <span class="signal-dot"></span>
+            <div><strong>NYU WIRELESS</strong><span>Brooklyn, NY</span></div>
+          </div>
+        </div>
+        <div class="portrait-coordinate" aria-hidden="true">40.6944° N · 73.9866° W</div>
+      </div>
+    </div>
+    <div class="container hero-foot">
+      <span>01 / Portfolio</span>
+      <a href="#about">Scroll to explore <span aria-hidden="true">↓</span></a>
+      <span>Updated {profile.updated}</span>
+    </div>
+  </section>
+
+  <section class="section about" id="about">
+    <div class="container about-grid">
+      <div>
+        <p class="eyebrow">01 / About</p>
+        <h2>Research in the loop.</h2>
+      </div>
+      <div class="about-copy">
+        <p>{profile.bio}</p>
+        <p>I am especially interested in closing the gap between high-fidelity simulation and deployable systems—from Sionna ray-tracing scenes to RFSoC data paths and ROS 2 measurement robots.</p>
+        <div class="affiliation-card">
+          <div class="affiliation-mark" aria-hidden="true">NYU</div>
+          <div>
+            <span>Current affiliation</span>
+            <strong>NYU Tandon School of Engineering</strong>
+            <small>Electrical & Computer Engineering · NYU WIRELESS</small>
+          </div>
+        </div>
+      </div>
+      <div class="interest-panel">
+        <p class="panel-label">Research interests</p>
+        <ul>
+          {researchInterests.map((interest, index) => (
+            <li><span>{String(index + 1).padStart(2, '0')}</span>{interest}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section work" id="work">
+    <div class="container">
+      <SectionHeading
+        eyebrow="02 / Selected work"
+        title="Ideas that move from model to machine."
+        description="Selected research and engineering projects across learning-enabled wireless systems, ray tracing, programmable RF, and autonomous measurement."
+      />
+      <div class="project-list">
+        {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section publications" id="publications">
+    <div class="container publication-layout">
+      <div class="publication-intro">
+        <SectionHeading
+          eyebrow="03 / Research output"
+          title="Publications."
+          description="Peer-reviewed and accepted work listed from the supplied CV. No citation counts or unverified links are shown."
+        />
+        <a class="button secondary" href={`${basePath}${profile.cvPath}`} target="_blank" rel="noopener noreferrer">Full CV <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="publication-list">
+        {publications.map((publication, index) => <PublicationItem publication={publication} index={index} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section timeline-section" id="experience">
+    <div class="container">
+      <SectionHeading
+        eyebrow="04 / Background"
+        title="Experience & education."
+        description="A path through wireless research, network operations, computer engineering, and artificial intelligence."
+      />
+      <div class="timeline">
+        {timeline.map((entry) => (
+          <article class="timeline-entry">
+            <div class="timeline-period">{entry.period}</div>
+            <div class="timeline-marker" aria-hidden="true"><span></span></div>
+            <div class="timeline-content">
+              <span class="timeline-kind">{entry.kind}</span>
+              <h3>{entry.title}</h3>
+              <p class="timeline-org">{entry.organization}{entry.location && <> · {entry.location}</>}</p>
+              {entry.description && <p class="timeline-description">{entry.description}</p>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section skills-section" id="skills">
+    <div class="container">
+      <SectionHeading eyebrow="05 / Technical toolkit" title="Built across layers." />
+      <div class="skills-grid">
+        {skillGroups.map((group, index) => (
+          <article class="skill-group">
+            <span class="skill-number">0{index + 1}</span>
+            <h3>{group.title}</h3>
+            <ul>{group.items.map((item) => <li>{item}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section awards-section" id="awards">
+    <div class="container awards-layout">
+      <div>
+        <p class="eyebrow">06 / Recognition</p>
+        <h2>Awards.</h2>
+      </div>
+      <div class="award-list">
+        {awards.map((award) => (
+          <article class="award-item">
+            <div>
+              <h3>{award.title}</h3>
+              <p>{award.organization}</p>
+            </div>
+            <span>{award.year}</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="container contact-inner">
+      <p class="eyebrow">07 / Contact</p>
+      <div class="contact-grid">
+        <div>
+          <h2>Let’s build the next signal path.</h2>
+          <p>I’m interested in conversations around wireless systems research, simulation, real-time platforms, and measurement automation.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="email-link" href={`mailto:${profile.email}`}>
+            <span>Academic email</span>
+            <strong>{profile.email}</strong>
+            <i aria-hidden="true">↗</i>
+          </a>
+          <div class="pending-socials" aria-label="Profile links awaiting verified URLs">
+            {socialLinks.map((link) => (
+              link.href ? (
+                <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${link.label} profile (opens in a new tab)`}>{link.label}<small>Open profile ↗</small></a>
+              ) : (
+                <span title={`TODO: add verified ${link.label} URL`}>{link.label}<small>{link.note}</small></span>
+              )
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  .hero { position: relative; overflow: hidden; min-height: calc(100svh - 4.6rem); padding: clamp(3rem, 7vw, 6.5rem) 0 1.3rem; border-bottom: 1px solid var(--border); }
+  .hero-grid-lines { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); background-size: 72px 72px; opacity: .26; mask-image: linear-gradient(to bottom, black, transparent 85%); }
+  .hero::after { content: ''; position: absolute; top: -18rem; right: -10rem; width: 45rem; height: 45rem; border-radius: 50%; background: var(--accent-soft); filter: blur(1px); opacity: .45; z-index: -1; }
+  .hero-inner { position: relative; display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(290px, .82fr); align-items: center; gap: clamp(2.5rem, 7vw, 7rem); }
+  .hero-kicker { display: flex; align-items: center; gap: .6rem; color: var(--accent-strong); font-family: var(--font-mono); font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .hero-kicker span { width: .55rem; height: .55rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); }
+  h1 { margin-top: 1.4rem; font-size: clamp(4.1rem, 11vw, 8.8rem); font-weight: 770; letter-spacing: -.085em; line-height: .82; }
+  h1 span { display: block; color: transparent; -webkit-text-stroke: 1.5px var(--text); }
+  .hero-statement { max-width: 40rem; margin-top: 2rem; color: var(--text); font-size: clamp(1.2rem, 2.3vw, 1.65rem); line-height: 1.5; letter-spacing: -.02em; }
+  .hero-role { margin-top: 1.25rem; color: var(--text-muted); line-height: 1.7; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
+  .button { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.8rem; padding: .75rem 1.1rem; border: 1px solid var(--border-strong); border-radius: .45rem; font-size: .82rem; font-weight: 750; text-decoration: none; transition: transform .18s ease, background .18s ease; }
+  .button:hover { transform: translateY(-2px); }
+  .button.primary { border-color: var(--text); background: var(--text); color: var(--background); }
+  .button.secondary { background: var(--surface-raised); color: var(--text); }
+  .social-row { display: flex; flex-wrap: wrap; gap: .6rem 1.2rem; margin-top: 1.35rem; color: var(--text-subtle); font-family: var(--font-mono); font-size: .7rem; }
+  .social-row span { text-decoration: line-through; text-decoration-color: var(--border-strong); }
+  .hero-portrait-wrap { position: relative; max-width: 27rem; justify-self: end; padding: 1.2rem 1.2rem 0 0; }
+  .portrait-frame { position: relative; overflow: hidden; aspect-ratio: .78; border: 1px solid var(--border-strong); border-radius: .8rem; background: var(--surface); box-shadow: var(--shadow-sm); }
+  .portrait-frame::before, .portrait-frame::after { content: ''; position: absolute; z-index: 3; width: 3rem; height: 3rem; pointer-events: none; }
+  .portrait-frame::before { top: .75rem; left: .75rem; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent); }
+  .portrait-frame::after { right: .75rem; bottom: .75rem; border-right: 1px solid var(--accent); border-bottom: 1px solid var(--accent); }
+  .portrait-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 48%; filter: saturate(.78) contrast(1.04); }
+  .portrait-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(7, 23, 30, .56), transparent 45%); pointer-events: none; }
+  .portrait-label { position: absolute; right: 1.25rem; bottom: 1.25rem; left: 1.25rem; display: flex; align-items: center; gap: .75rem; color: white; }
+  .portrait-label strong, .portrait-label span { display: block; }
+  .portrait-label strong { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; }
+  .portrait-label span { margin-top: .15rem; color: rgba(255,255,255,.7); font-size: .68rem; }
+  .signal-dot { flex: none; width: .65rem; height: .65rem; border: 2px solid #8fe4d5; border-radius: 50%; box-shadow: 0 0 0 5px rgba(104,213,196,.18); }
+  .portrait-coordinate { position: absolute; top: 0; right: -1.3rem; color: var(--text-subtle); font-family: var(--font-mono); font-size: .6rem; letter-spacing: .1em; writing-mode: vertical-rl; }
+  .hero-foot { position: relative; display: flex; justify-content: space-between; gap: 1rem; margin-top: clamp(3rem, 7vw, 6rem); color: var(--text-subtle); font-family: var(--font-mono); font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; }
+  .hero-foot a { color: var(--text-muted); text-decoration: none; }
+
+  .about { background: var(--surface-raised); }
+  .about-grid { display: grid; grid-template-columns: .8fr 1.25fr .8fr; gap: clamp(2rem, 5vw, 5rem); }
+  .about-grid h2 { margin-top: 1rem; font-size: clamp(2.8rem, 6vw, 5.7rem); }
+  .about-copy > p { color: var(--text-muted); font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.8; }
+  .about-copy > p:first-child { color: var(--text); }
+  .about-copy > p + p { margin-top: 1.3rem; }
+  .affiliation-card { display: flex; align-items: center; gap: 1rem; margin-top: 2.5rem; padding: 1.1rem; border: 1px solid var(--border); border-radius: .75rem; background: var(--background); }
+  .affiliation-mark { display: grid; place-items: center; width: 3.2rem; height: 3.2rem; flex: none; border-radius: .5rem; background: #57068c; color: white; font-family: var(--font-mono); font-size: .75rem; font-weight: 700; }
+  .affiliation-card span, .affiliation-card strong, .affiliation-card small { display: block; }
+  .affiliation-card span, .panel-label { color: var(--text-subtle); font-family: var(--font-mono); font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; }
+  .affiliation-card strong { margin-top: .2rem; font-size: .88rem; }
+  .affiliation-card small { margin-top: .15rem; color: var(--text-muted); }
+  .interest-panel { padding-left: 1.5rem; border-left: 1px solid var(--border); }
+  .interest-panel ul { margin: 1rem 0 0; padding: 0; list-style: none; }
+  .interest-panel li { display: grid; grid-template-columns: 2rem 1fr; gap: .4rem; padding: .8rem 0; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: .86rem; }
+  .interest-panel li span { color: var(--accent-strong); font-family: var(--font-mono); font-size: .67rem; }
+
+  .work { background: var(--background); }
+  .project-list { display: grid; gap: 1.4rem; }
+  .publication-layout { display: grid; grid-template-columns: minmax(250px, .55fr) minmax(0, 1.45fr); gap: clamp(3rem, 7vw, 7rem); }
+  .publication-intro { align-self: start; position: sticky; top: 7rem; }
+  .publication-intro :global(.section-heading) { margin-bottom: 1.5rem; }
+  .publication-intro :global(.section-heading h2) { font-size: clamp(2.8rem, 6vw, 5rem); }
+
+  .timeline-section { background: var(--surface-raised); }
+  .timeline { max-width: 58rem; margin-left: auto; }
+  .timeline-entry { display: grid; grid-template-columns: 10rem 1.5rem 1fr; gap: 1.2rem; min-height: 9rem; }
+  .timeline-period { padding-top: .15rem; color: var(--text-muted); font-family: var(--font-mono); font-size: .72rem; text-align: right; }
+  .timeline-marker { position: relative; display: flex; justify-content: center; }
+  .timeline-marker::before { content: ''; position: absolute; top: .7rem; bottom: 0; width: 1px; background: var(--border); }
+  .timeline-entry:last-child .timeline-marker::before { display: none; }
+  .timeline-marker span { position: relative; z-index: 1; width: .72rem; height: .72rem; border: 2px solid var(--accent); border-radius: 50%; background: var(--surface-raised); }
+  .timeline-content { padding-bottom: 2.5rem; }
+  .timeline-kind { color: var(--accent-strong); font-family: var(--font-mono); font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; }
+  .timeline-content h3 { margin-top: .35rem; font-size: 1.35rem; }
+  .timeline-org { margin-top: .35rem; color: var(--text-muted); }
+  .timeline-description { max-width: 38rem; margin-top: .65rem; color: var(--text-muted); line-height: 1.65; }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+  .skill-group { min-height: 20rem; padding: 1.4rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface-raised); }
+  .skill-number { color: var(--text-subtle); font-family: var(--font-mono); font-size: .68rem; }
+  .skill-group h3 { margin-top: 3rem; font-size: 1.3rem; }
+  .skill-group ul { margin: 1.5rem 0 0; padding: 0; list-style: none; }
+  .skill-group li { padding: .48rem 0; color: var(--text-muted); font-size: .82rem; }
+
+  .awards-section { padding-top: 2rem; }
+  .awards-layout { display: grid; grid-template-columns: .65fr 1.35fr; gap: clamp(3rem, 8vw, 8rem); }
+  .awards-layout h2 { margin-top: 1rem; }
+  .award-list { border-top: 1px solid var(--border); }
+  .award-item { display: flex; justify-content: space-between; gap: 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+  .award-item h3 { max-width: 34rem; font-size: 1.1rem; line-height: 1.35; }
+  .award-item p { margin-top: .4rem; color: var(--text-muted); font-size: .84rem; }
+  .award-item > span { flex: none; color: var(--text-subtle); font-family: var(--font-mono); font-size: .7rem; }
+
+  .contact-section { position: relative; overflow: hidden; padding-block: clamp(5rem, 11vw, 8.5rem); background: #0b1f2a; color: #eff8f5; }
+  .contact-section::after { content: ''; position: absolute; right: -13rem; bottom: -17rem; width: 38rem; height: 38rem; border: 1px solid rgba(104,213,196,.22); border-radius: 50%; box-shadow: 0 0 0 5rem rgba(104,213,196,.03), 0 0 0 10rem rgba(104,213,196,.02); }
+  .contact-inner { position: relative; z-index: 1; }
+  .contact-section .eyebrow { color: #68d5c4; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 8vw, 8rem); margin-top: 2rem; }
+  .contact-grid h2 { max-width: 12ch; }
+  .contact-grid > div > p { max-width: 33rem; margin-top: 1.4rem; color: #a9bcbd; font-size: 1.05rem; line-height: 1.75; }
+  .contact-actions { align-self: end; }
+  .email-link { position: relative; display: block; padding: 1.5rem 3rem 1.5rem 0; border-top: 1px solid #34505a; border-bottom: 1px solid #34505a; text-decoration: none; }
+  .email-link span, .email-link strong { display: block; }
+  .email-link span { color: #8ba3a7; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .09em; text-transform: uppercase; }
+  .email-link strong { margin-top: .55rem; font-size: clamp(1.15rem, 2.8vw, 1.75rem); }
+  .email-link i { position: absolute; top: 50%; right: 0; transform: translateY(-50%); color: #68d5c4; font-size: 1.4rem; font-style: normal; }
+  .pending-socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-top: 1.2rem; }
+  .pending-socials > span, .pending-socials > a { padding: .7rem; border: 1px dashed #34505a; color: #8ba3a7; font-size: .75rem; text-decoration: none; }
+  .pending-socials > a { border-style: solid; color: #eff8f5; }
+  .pending-socials small { display: block; margin-top: .2rem; color: #607b80; font-family: var(--font-mono); font-size: .58rem; }
+
+  @media (max-width: 980px) {
+    .about-grid { grid-template-columns: .8fr 1.2fr; }
+    .interest-panel { grid-column: 2; }
+    .skills-grid { grid-template-columns: repeat(3, 1fr); }
+    .skill-group { min-height: 17rem; }
+  }
+
+  @media (max-width: 760px) {
+    .hero { min-height: auto; padding-top: 2.5rem; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-copy { display: contents; }
+    .hero-kicker, h1, .hero-statement, .hero-role, .hero-actions, .social-row { grid-column: 1; }
+    .hero-portrait-wrap { grid-row: 3; width: min(100%, 25rem); justify-self: start; margin: .5rem 0; }
+    .hero-statement { grid-row: 4; }
+    .hero-role { grid-row: 5; }
+    .hero-actions { grid-row: 6; }
+    .social-row { grid-row: 7; }
+    .hero-foot span:first-child { display: none; }
+    .about-grid, .publication-layout, .awards-layout, .contact-grid { grid-template-columns: 1fr; }
+    .interest-panel { grid-column: auto; padding-left: 0; border-left: 0; }
+    .publication-intro { position: static; }
+    .timeline { margin-left: 0; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { gap: 3rem; }
+  }
+
+  @media (max-width: 520px) {
+    h1 { font-size: clamp(4rem, 22vw, 6rem); }
+    .hero-foot span:last-child { display: none; }
+    .hero-actions .button { flex: 1; }
+    .timeline-entry { grid-template-columns: 1.1rem 1fr; gap: .7rem; }
+    .timeline-period { grid-column: 2; text-align: left; }
+    .timeline-marker { grid-column: 1; grid-row: 1 / span 2; }
+    .timeline-content { grid-column: 2; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .skill-group { min-height: auto; }
+    .skill-group h3 { margin-top: 1.5rem; }
+    .award-item { display: block; }
+    .award-item > span { display: block; margin-top: .8rem; }
+    .pending-socials { grid-template-columns: 1fr; }
+  }
+</style>

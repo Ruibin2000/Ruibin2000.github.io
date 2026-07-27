@@ -1,0 +1,19 @@
+# Missing information and verification checklist
+
+Visible placeholders remain on the public site until these items are supplied and verified:
+
+- [x] GitHub profile URL — `https://github.com/Ruibin2000`
+- [x] Google Scholar profile URL — `https://scholar.google.com/citations?user=sQWvCLsAAAAJ&hl=en&oi=ao`
+- [x] LinkedIn profile URL — `https://www.linkedin.com/in/ruibin-chen-422290357/`
+- [ ] Public repository or project-detail URL for the RFSoC Waveform Transmitter
+- [ ] Public repository or project-detail URL for the Robotic Wireless Measurement Platform
+- [ ] RFSoC Waveform Transmitter dates and current status
+- [ ] NYU WIRELESS Research Assistant start date
+- [ ] Year of the Myron M. Rosenthal Award
+
+Content held back because the supplied CV is inconsistent or incomplete:
+
+- [ ] Confirm the start date and status of “Multi-Cell Multi-Band Handset Digital Twin for Learning-Based Closed-Loop Array Activation.” The CV says “Sep 2026–Present,” which conflicts with the July 2026 site update date.
+- [ ] Confirm whether a project link, DOI, or publisher URL should be added for each publication that currently has no link.
+- [ ] Confirm whether the phone number and street-level location should be public. They are intentionally omitted from the website.
+- [ ] Supply dedicated project photographs or screenshots if they should replace the current accessible technical diagrams.

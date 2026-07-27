@@ -1,0 +1,38 @@
+---
+import { profile } from '@/data/profile';
+import { basePath } from '@/utils/base';
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="footer-name" href={basePath}>{profile.name}</a>
+      <p>Wireless systems, from propagation models to programmable hardware.</p>
+    </div>
+    <div class="footer-nav">
+      <a href={`${basePath}#work`}>Work</a>
+      <a href={`${basePath}#publications`}>Publications</a>
+      <a href={`${basePath}resume/`}>Résumé</a>
+    </div>
+    <div class="footer-meta">
+      <span>Updated {profile.updated}</span>
+      <span>© {new Date().getFullYear()} {profile.name}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { padding: 3rem 0; border-top: 1px solid var(--border); }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr .6fr .7fr; gap: 2rem; }
+  .footer-name { color: var(--text); font-weight: 750; text-decoration: none; }
+  .footer-grid p { max-width: 28rem; margin-top: .6rem; color: var(--text-muted); line-height: 1.6; }
+  .footer-nav, .footer-meta { display: grid; align-content: start; gap: .55rem; }
+  .footer-nav a, .footer-meta span { color: var(--text-muted); font-size: .82rem; }
+  .footer-meta { justify-items: end; font-family: var(--font-mono); }
+
+  @media (max-width: 700px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid > div:first-child { grid-column: 1 / -1; }
+    .footer-meta { justify-items: start; }
+  }
+</style>

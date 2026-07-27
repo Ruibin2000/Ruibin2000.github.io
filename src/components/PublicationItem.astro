@@ -1,0 +1,50 @@
+---
+import type { Publication } from '@/data/publications';
+
+interface Props {
+  publication: Publication;
+  index: number;
+}
+
+const { publication, index } = Astro.props;
+---
+
+<article class="publication-item">
+  <div class="publication-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
+  <div>
+    <div class="publication-meta">
+      <span>{publication.year}</span>
+      {publication.status && <span class="publication-status">{publication.status}</span>}
+    </div>
+    <h3>{publication.title}</h3>
+    <p class="authors">{publication.authors}</p>
+    <p class="venue">{publication.venue}</p>
+    {publication.links && (
+      <div class="publication-links">
+        {publication.links.map((link) => (
+          <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${link.label} for ${publication.title} (opens in a new tab)`}>
+            {link.label}<span aria-hidden="true"> ↗</span>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .publication-item { display: grid; grid-template-columns: 3.2rem 1fr; gap: 1rem; padding: 1.8rem 0; border-top: 1px solid var(--border); }
+  .publication-item:last-child { border-bottom: 1px solid var(--border); }
+  .publication-number { padding-top: .15rem; color: var(--text-subtle); font-family: var(--font-mono); font-size: .75rem; }
+  .publication-meta { display: flex; gap: .65rem; align-items: center; color: var(--accent-strong); font-family: var(--font-mono); font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; }
+  .publication-status { padding: .2rem .45rem; border: 1px solid var(--accent-border); border-radius: 999px; background: var(--accent-soft); }
+  h3 { max-width: 54rem; margin-top: .65rem; font-size: clamp(1.1rem, 2.2vw, 1.45rem); line-height: 1.35; }
+  .authors, .venue { max-width: 57rem; color: var(--text-muted); line-height: 1.65; }
+  .authors { margin-top: .65rem; }
+  .venue { margin-top: .25rem; font-style: italic; }
+  .publication-links { display: flex; gap: 1rem; margin-top: .8rem; }
+  .publication-links a { color: var(--accent-strong); font-family: var(--font-mono); font-size: .78rem; font-weight: 700; }
+
+  @media (max-width: 560px) {
+    .publication-item { grid-template-columns: 2rem 1fr; }
+  }
+</style>

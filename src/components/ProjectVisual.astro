@@ -1,0 +1,125 @@
+---
+interface Props {
+  type: 'waveform' | 'attention' | 'ray' | 'robot';
+  title: string;
+}
+
+const { type, title } = Astro.props;
+const titleId = `${type}-visual-title`;
+---
+
+<svg class="project-visual" viewBox="0 0 640 330" role="img" aria-labelledby={titleId}>
+  <title id={titleId}>Abstract technical diagram for {title}</title>
+  <defs>
+    <pattern id={`${type}-grid`} width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0v32" fill="none" stroke="currentColor" stroke-opacity=".09" />
+    </pattern>
+    <linearGradient id={`${type}-fade`} x1="0" x2="1">
+      <stop offset="0" stop-color="var(--visual-accent)" stop-opacity=".15" />
+      <stop offset="1" stop-color="var(--visual-accent)" stop-opacity=".02" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="330" rx="24" fill="var(--visual-surface)" />
+  <rect width="640" height="330" rx="24" fill={`url(#${type}-grid)`} />
+
+  {type === 'waveform' && (
+    <g>
+      <rect x="58" y="72" width="150" height="186" rx="16" fill={`url(#${type}-fade)`} stroke="var(--visual-line)" />
+      <text x="86" y="112" fill="var(--visual-muted)" class="visual-label">MEMORY</text>
+      <rect x="85" y="138" width="96" height="22" rx="5" class="node" />
+      <rect x="85" y="174" width="96" height="22" rx="5" class="node" />
+      <rect x="85" y="210" width="96" height="22" rx="5" class="node" />
+      <path d="M208 165h82" class="signal dotted" />
+      <rect x="290" y="120" width="105" height="90" rx="14" class="chip" />
+      <text x="315" y="170" class="visual-label bright">DAC</text>
+      <path d="M395 165h54" class="signal dotted" />
+      <path d="M450 166c15-68 28 68 44 0s29 68 45 0 30 68 46 0" class="wave" />
+      <circle cx="590" cy="166" r="9" fill="var(--visual-accent)" />
+    </g>
+  )}
+
+  {type === 'attention' && (
+    <g>
+      {[0, 1, 2, 3, 4].map((item) => <rect x={54 + item * 62} y="62" width="38" height="72" rx="8" class="token" opacity={0.48 + item * 0.1} />)}
+      {[0, 1, 2, 3].map((item) => <path d={`M${73 + item * 62} 134 Q 290 220 ${406 + item * 42} 128`} class="attention-line" opacity={0.28 + item * 0.14} />)}
+      {[0, 1, 2, 3].map((item) => <circle cx={406 + item * 42} cy="128" r="15" class="attention-node" />)}
+      <rect x="382" y="205" width="198" height="64" rx="14" class="chip" />
+      <path d="M415 238h132" class="mini-wave" />
+      <text x="56" y="286" class="visual-label">SPARSE HISTORY</text>
+      <text x="430" y="98" class="visual-label">RATE t+1</text>
+    </g>
+  )}
+
+  {type === 'ray' && (
+    <g>
+      <rect x="70" y="186" width="105" height="90" rx="5" class="building" />
+      <rect x="196" y="110" width="118" height="166" rx="5" class="building" />
+      <rect x="465" y="152" width="105" height="124" rx="5" class="building" />
+      <path d="M44 244 196 112 378 54 465 154 595 100" class="ray primary" />
+      <path d="M44 244 174 186 314 214 465 154 595 100" class="ray secondary" />
+      <circle cx="44" cy="244" r="11" fill="var(--visual-accent)" />
+      <circle cx="595" cy="100" r="11" class="receiver" />
+      {[95, 125, 225, 252, 495, 525].map((x) => <rect x={x} y={x < 190 ? 212 : x < 400 ? 143 : 181} width="15" height="20" rx="2" class="window" />)}
+      <text x="70" y="56" class="visual-label">MULTIPATH GEOMETRY</text>
+    </g>
+  )}
+
+  {type === 'robot' && (
+    <g>
+      <path d="M65 76h148v83H109v111h174v-68h121v68h168" class="map-line" />
+      <path d="M91 239c63-112 134-132 213-64s148 47 240-64" class="route" />
+      <circle cx="104" cy="219" r="22" class="robot-body" />
+      <circle cx="96" cy="239" r="7" class="wheel" />
+      <circle cx="114" cy="239" r="7" class="wheel" />
+      <path d="M104 198v-24" class="antenna" />
+      <circle cx="104" cy="168" r="6" fill="var(--visual-accent)" />
+      <path d="M126 204 306 115M126 216l245-12M122 228l188 63" class="scan" />
+      <circle cx="500" cy="112" r="15" class="target" />
+      <path d="M480 112h40M500 92v40" class="target-mark" />
+      <text x="448" y="286" class="visual-label">SLAM MAP</text>
+    </g>
+  )}
+</svg>
+
+<style>
+  .project-visual {
+    display: block;
+    width: 100%;
+    height: auto;
+    color: var(--text);
+    --visual-surface: color-mix(in srgb, var(--surface-raised) 80%, var(--accent) 20%);
+    --visual-line: color-mix(in srgb, var(--border) 70%, var(--accent) 30%);
+    --visual-muted: var(--text-muted);
+    --visual-accent: var(--accent);
+  }
+
+  .visual-label {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: .12em;
+    fill: var(--visual-muted);
+  }
+
+  .visual-label.bright { fill: var(--text); font-size: 15px; }
+  .node, .token { fill: color-mix(in srgb, var(--accent) 22%, transparent); stroke: var(--visual-line); }
+  .chip { fill: var(--surface); stroke: var(--visual-line); stroke-width: 2; }
+  .signal, .wave, .mini-wave, .ray, .route, .scan { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .signal { stroke: var(--visual-line); stroke-width: 2; }
+  .dotted { stroke-dasharray: 5 8; }
+  .wave { stroke: var(--visual-accent); stroke-width: 5; }
+  .mini-wave { stroke: var(--visual-accent); stroke-width: 3; d: path('M415 238c14-25 24 25 38 0s24 25 38 0 24 25 38 0 24-25 38 0'); }
+  .attention-line { fill: none; stroke: var(--visual-accent); stroke-width: 2; }
+  .attention-node { fill: var(--surface); stroke: var(--visual-accent); stroke-width: 3; }
+  .building { fill: color-mix(in srgb, var(--surface) 85%, var(--accent) 15%); stroke: var(--visual-line); }
+  .window { fill: color-mix(in srgb, var(--accent) 28%, transparent); }
+  .ray.primary { stroke: var(--visual-accent); stroke-width: 4; }
+  .ray.secondary { stroke: var(--visual-muted); stroke-width: 2; stroke-dasharray: 7 7; }
+  .receiver { fill: var(--surface); stroke: var(--visual-accent); stroke-width: 4; }
+  .map-line { fill: none; stroke: var(--visual-line); stroke-width: 16; stroke-linejoin: round; opacity: .5; }
+  .route { stroke: var(--visual-accent); stroke-width: 4; stroke-dasharray: 8 9; }
+  .robot-body { fill: var(--surface); stroke: var(--visual-accent); stroke-width: 4; }
+  .wheel { fill: var(--text-muted); }
+  .antenna, .target-mark { stroke: var(--visual-accent); stroke-width: 3; }
+  .scan { stroke: var(--visual-accent); stroke-width: 2; opacity: .28; }
+  .target { fill: var(--surface); stroke: var(--visual-accent); stroke-width: 3; }
+</style>
