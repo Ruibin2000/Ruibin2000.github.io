@@ -43,6 +43,8 @@ The workflow at `.github/workflows/deploy.yml` checks and builds the site on eve
 
 `astro.config.mjs` detects whether the repository is an account site (`USERNAME.github.io`) or a project site and sets the GitHub Pages base path accordingly. The workflow sets the production site origin from `github.repository_owner`. For a custom domain, define a `SITE_URL` environment variable and add the corresponding `public/CNAME` file.
 
+If Actions shows a separate **pages build and deployment** run failing at **Build with Jekyll**, check **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**. The branch-based source runs Jekyll against the Astro source files and misreads their script front matter as YAML. Use the **Deploy Astro site to GitHub Pages** workflow to publish this repository. Changing the source prevents future Jekyll runs; existing failed check records remain attached to their original commits.
+
 ## Content integrity
 
 Do not add unverified dates, metrics, publications, awards, affiliations, collaborators, or external links. Use a visible “to confirm” label in public-facing data and a `TODO` note in the missing-information checklist until the information is verified.
