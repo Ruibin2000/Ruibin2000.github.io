@@ -17,7 +17,7 @@ import { basePath } from '@/utils/base';
       </div>
       <div>
         <button type="button" onclick="window.print()">Print this page</button>
-        <a href={`${basePath}${profile.cvPath}`} target="_blank" rel="noopener noreferrer">Open full CV ↗</a>
+        <a href={`${basePath}${profile.cvPath}`} target="_blank" rel="noopener noreferrer" aria-label="Open full CV (opens in a new tab)">Open full CV <span aria-hidden="true">↗</span></a>
       </div>
     </div>
 
@@ -56,7 +56,7 @@ import { basePath } from '@/utils/base';
         <div class="resume-entries">
           {projects.map((project) => (
             <article class="resume-entry">
-              <div><strong>{project.title}</strong><span>{project.status} · {project.technologies.join(', ')}</span><p>{project.description}</p></div>
+              <div><strong>{project.title}</strong>{project.role && <span>{project.role}</span>}<span>{project.status} · {project.technologies.join(', ')}</span><p>{project.description}</p>{project.pendingLink && <span class="no-print">{project.pendingLink}</span>}</div>
               <time>{project.period}</time>
             </article>
           ))}
@@ -112,7 +112,7 @@ import { basePath } from '@/utils/base';
 
   @media (max-width: 650px) {
     .resume-toolbar, .resume-header { display: block; }
-    .resume-toolbar > div:last-child { margin-top: 1rem; }
+    .resume-toolbar > div:last-child { margin-top: 1rem; flex-wrap: wrap; }
     address { justify-items: start; margin-top: 1rem; }
     .resume-entry { grid-template-columns: 1fr; gap: .25rem; }
     .resume-two-column { grid-template-columns: 1fr; gap: 0; }
@@ -122,7 +122,12 @@ import { basePath } from '@/utils/base';
     .resume-page { padding: 0; }
     .resume-sheet { width: 100%; max-width: none; padding: 0; border: 0; box-shadow: none; }
     .resume-header h1 { font-size: 28pt; }
-    .resume-sheet section { margin-top: 14pt; break-inside: avoid; }
+    .resume-sheet section { margin-top: 14pt; }
+    .resume-sheet h2 { break-after: avoid; }
+    .resume-header { display: flex; }
+    address { justify-items: end; margin-top: 0; }
+    .resume-entry { grid-template-columns: 1fr auto; gap: 1.5rem; }
+    .resume-two-column { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     .resume-entry { padding: 4pt 0; break-inside: avoid; }
     .resume-publications li { padding-block: 3pt; }
   }

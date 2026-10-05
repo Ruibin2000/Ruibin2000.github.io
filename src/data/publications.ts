@@ -9,6 +9,13 @@ export interface Publication {
 
 export const publications: Publication[] = [
   {
+    title: 'MAGNETAR: Multipath-Guided Spatial Posteriors for Transmitter Pose Inference in the Upper Mid-Band',
+    authors: 'H. Lei, R. Chen, Y. Jiang, A. Rasteh, A. Dhananjay, and S. Rangan',
+    venue: 'arXiv:2609.20670',
+    year: 2026,
+    status: 'Preprint'
+  },
+  {
     title: 'Transformer-Based Rate Prediction for Multi-Band Cellular Handsets',
     authors: 'Ruibin Chen, Haozhe Lei, Hao Guo, Marco Mezzavilla, Hitesh Poddar, Tomoki Yoshimura, and Sundeep Rangan',
     venue: '2026 IEEE International Conference on Communications Workshops (ICC Workshops), pp. 1–6',
@@ -22,7 +29,7 @@ export const publications: Publication[] = [
   },
   {
     title: 'An Efficient Producer Mobility Management Technique for Real-Time Communication in NDN-Based Remote Health Monitoring Systems',
-    authors: 'P. Kar, Ruibin Chen, and Y. Qian',
+    authors: 'Pushpendu Kar, Ruibin Chen, and Yukai Qian',
     venue: 'Smart Health, vol. 26, article 100309',
     year: 2022
   },

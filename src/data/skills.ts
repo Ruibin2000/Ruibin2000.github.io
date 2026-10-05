@@ -1,9 +1,9 @@
 export const skillGroups = [
-  { title: 'Wireless', items: ['MIMO', 'OFDM', 'Channel modeling', 'Channel estimation', 'FR1 / FR3'] },
+  { title: 'Wireless', items: ['MIMO', 'OFDM', 'Channel modeling', 'Channel estimation', 'FR1 / FR3', 'Channel sounding', 'ISAC'] },
   { title: 'Simulation', items: ['NVIDIA Sionna', 'MATLAB', 'Python', 'Wireless InSite'] },
   { title: 'FPGA & RF', items: ['Vivado', 'Vitis HLS', 'RFSoC', 'PYNQ', 'AXI4'] },
-  { title: 'Robotics', items: ['ROS 2', 'TurtleBot 4', 'Clearpath Jackal', 'SLAM', 'RViz'] },
-  { title: 'Programming', items: ['Python', 'C++', 'C', 'MATLAB', 'Tcl', 'Java'] }
+  { title: 'Robotics', items: ['ROS 2', 'TurtleBot 4', 'PTUD48 Gimbal', 'SLAM', 'RViz', 'Fast DDS'] },
+  { title: 'Programming', items: ['Python', 'C++', 'C', 'MATLAB', 'Tcl', 'Java', 'OpenGL', 'OpenCV', 'Git', 'JavaFX'] }
 ] as const;
 
 export const awards = [

@@ -21,7 +21,7 @@ import { basePath } from '@/utils/base';
         <p class="hero-statement">{profile.statement}</p>
         <p class="hero-role">{profile.role}<br />{profile.affiliation}</p>
         <div class="hero-actions" aria-label="Profile links">
-          <a class="button primary" href={`${basePath}${profile.cvPath}`} target="_blank" rel="noopener noreferrer">View CV <span aria-hidden="true">↗</span></a>
+          <a class="button primary" href={`${basePath}${profile.cvPath}`} target="_blank" rel="noopener noreferrer" aria-label="View CV (opens in a new tab)">View CV <span aria-hidden="true">↗</span></a>
           <a class="button secondary" href={`mailto:${profile.email}`}>Email me</a>
         </div>
         <div class="social-row">
@@ -68,7 +68,7 @@ import { basePath } from '@/utils/base';
       </div>
       <div class="about-copy">
         <p>{profile.bio}</p>
-        <p>I am especially interested in closing the gap between high-fidelity simulation and deployable systems—from Sionna ray-tracing scenes to RFSoC data paths and ROS 2 measurement robots.</p>
+        <p>{profile.researchApproach}</p>
         <div class="affiliation-card">
           <div class="affiliation-mark" aria-hidden="true">NYU</div>
           <div>
@@ -97,7 +97,7 @@ import { basePath } from '@/utils/base';
         description="Selected research and engineering projects across learning-enabled wireless systems, ray tracing, programmable RF, and autonomous measurement."
       />
       <div class="project-list">
-        {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+        {projects.filter((project) => project.featured !== false).map((project, index) => <ProjectCard project={project} index={index} />)}
       </div>
     </div>
   </section>
@@ -108,9 +108,9 @@ import { basePath } from '@/utils/base';
         <SectionHeading
           eyebrow="03 / Research output"
           title="Publications."
-          description="Peer-reviewed and accepted work listed from the supplied CV. No citation counts or unverified links are shown."
+          description="Publications and preprints listed in the supplied CV. Preprints are labeled separately."
         />
-        <a class="button secondary" href={`${basePath}${profile.cvPath}`} target="_blank" rel="noopener noreferrer">Full CV <span aria-hidden="true">↗</span></a>
+        <a class="button secondary" href={`${basePath}${profile.cvPath}`} target="_blank" rel="noopener noreferrer" aria-label="Full CV (opens in a new tab)">Full CV <span aria-hidden="true">↗</span></a>
       </div>
       <div class="publication-list">
         {publications.map((publication, index) => <PublicationItem publication={publication} index={index} />)}

@@ -8,6 +8,8 @@ Edit `src/data/projects.ts`. Each project needs a unique `slug`, title, category
 
 Valid statuses are `Ongoing`, `Completed`, and `Status to confirm`. Do not mark a project completed because a prototype exists—use the state provided by the project owner.
 
+The homepage shows projects unless `featured: false` is set; `/resume/` includes every project. Use the optional `role` field for a role explicitly supplied in the CV. Project slugs also provide unique IDs for the accessible SVG diagrams.
+
 ## Add a publication
 
 Edit `src/data/publications.ts`. Add the title, complete author list as supplied, venue, year, and optional status. Only add links from a DOI, publisher URL, repository, or identifier verified by the owner. Abstracts are intentionally omitted until verified text is supplied.
@@ -28,3 +30,5 @@ Edit `src/data/skills.ts` for skill groups and awards. Edit `src/data/profile.ts
 - Favicon: `public/favicon.svg`
 
 Keep the profile image reasonably compressed and preserve meaningful alt text in `src/pages/index.astro`. After any asset change, run a production build and inspect the result at mobile and desktop widths.
+
+Current content source: `public/files/Ruibin_cv_9.24.2026.pdf`, supplied by the owner and reconciled on October 4, 2026. The stable downloadable CV path contains an identical copy of that file. The homepage features six wireless research projects; the webpage résumé also includes the three earlier embedded/networking projects in the supplied CV.

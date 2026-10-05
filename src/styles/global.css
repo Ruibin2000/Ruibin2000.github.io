@@ -46,6 +46,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
 body { margin: 0; background: var(--background); color: var(--text); font-family: var(--font-sans); font-size: 16px; line-height: 1.5; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+a { overflow-wrap: anywhere; }
 button, input, textarea, select { font: inherit; }
 img, svg { max-width: 100%; }
 a { color: inherit; text-underline-offset: .18em; }
@@ -68,8 +69,8 @@ h2 { font-size: clamp(2.2rem, 6vw, 4.5rem); }
 }
 
 @media print {
-  :root, [data-theme='dark'] { --background: #fff; --surface-raised: #fff; --text: #000; --text-muted: #333; --text-subtle: #555; --border: #bbb; }
-  .site-header, .site-footer, .no-print { display: none !important; }
+  :root, [data-theme='dark'] { color-scheme: light; --background: #fff; --surface-raised: #fff; --text: #000; --text-muted: #333; --text-subtle: #555; --border: #bbb; --accent-strong: #096f65; }
+  .site-header, .site-footer, .no-print, .skip-link { display: none !important; }
   body { background: #fff; font-size: 10.5pt; }
   a { text-decoration: none; }
   @page { margin: .6in; }

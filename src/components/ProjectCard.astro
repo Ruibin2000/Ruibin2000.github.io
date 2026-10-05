@@ -12,7 +12,7 @@ const { project, index } = Astro.props;
 
 <article class="project-card" id={project.slug}>
   <div class="project-image">
-    <ProjectVisual type={project.visual} title={project.title} />
+    <ProjectVisual type={project.visual} title={project.title} idPrefix={project.slug} />
     <span class:list={['status', project.status.toLowerCase().replaceAll(' ', '-')]}> 
       <span aria-hidden="true"></span>{project.status}
     </span>

@@ -13,7 +13,7 @@ export const timeline: TimelineEntry[] = [
     title: 'PhD Student & Research Assistant',
     organization: 'New York University · NYU WIRELESS',
     location: 'Brooklyn, NY',
-    description: 'Pursuing a PhD while conducting research in wireless channel modeling, learning-based prediction, ray tracing, and robotic measurement systems.',
+    description: 'Pursuing a PhD while conducting research in FR3 channel sounding, handset digital twins, learning-based prediction and array activation, UAV sensing simulation, and robotic transmitter localization.',
     kind: 'Education & Research'
   },
   {

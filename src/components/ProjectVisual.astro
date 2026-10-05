@@ -2,29 +2,30 @@
 interface Props {
   type: 'waveform' | 'attention' | 'ray' | 'robot';
   title: string;
+  idPrefix: string;
 }
 
-const { type, title } = Astro.props;
-const titleId = `${type}-visual-title`;
+const { type, title, idPrefix } = Astro.props;
+const titleId = `${idPrefix}-visual-title`;
 ---
 
 <svg class="project-visual" viewBox="0 0 640 330" role="img" aria-labelledby={titleId}>
   <title id={titleId}>Abstract technical diagram for {title}</title>
   <defs>
-    <pattern id={`${type}-grid`} width="32" height="32" patternUnits="userSpaceOnUse">
+    <pattern id={`${idPrefix}-grid`} width="32" height="32" patternUnits="userSpaceOnUse">
       <path d="M32 0H0v32" fill="none" stroke="currentColor" stroke-opacity=".09" />
     </pattern>
-    <linearGradient id={`${type}-fade`} x1="0" x2="1">
+    <linearGradient id={`${idPrefix}-fade`} x1="0" x2="1">
       <stop offset="0" stop-color="var(--visual-accent)" stop-opacity=".15" />
       <stop offset="1" stop-color="var(--visual-accent)" stop-opacity=".02" />
     </linearGradient>
   </defs>
   <rect width="640" height="330" rx="24" fill="var(--visual-surface)" />
-  <rect width="640" height="330" rx="24" fill={`url(#${type}-grid)`} />
+  <rect width="640" height="330" rx="24" fill={`url(#${idPrefix}-grid)`} />
 
   {type === 'waveform' && (
     <g>
-      <rect x="58" y="72" width="150" height="186" rx="16" fill={`url(#${type}-fade)`} stroke="var(--visual-line)" />
+      <rect x="58" y="72" width="150" height="186" rx="16" fill={`url(#${idPrefix}-fade)`} stroke="var(--visual-line)" />
       <text x="86" y="112" fill="var(--visual-muted)" class="visual-label">MEMORY</text>
       <rect x="85" y="138" width="96" height="22" rx="5" class="node" />
       <rect x="85" y="174" width="96" height="22" rx="5" class="node" />
